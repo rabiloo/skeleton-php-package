@@ -18,7 +18,7 @@ You're free to use this package (it's [MIT-licensed](LICENSE.md)), but if it mak
 
 Our address is: Rabiloo Co. Ltd., Room 1812, HH2 Bac Ha Building, To Huu Street, Hanoi City, Vietnam.
 
-We publish all received postcards [on our company website](https://rabiloo.com/opensource/postcards).
+We publish all received postcards [on our company website](https://rabiloo.com/postcards).
 
 ## Installation
 
@@ -51,16 +51,16 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Security
 
-If you discover any security related issues, please email freek@spatie.be instead of using the issue tracker.
+If you discover any security related issues, please email contact@rabiloo.com instead of using the issue tracker.
 
 ## Credits
 
 - [:author_name](https://github.com/:author_username)
 - [All Contributors](../../contributors)
 
-## About Spatie
+## About Rabiloo
 
-Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
+Rabiloo is a software company based in Hanoi, Vietnam. You'll find an overview of all our open source projects [on our website](https://rabiloo.com/opensource).
 
 ## License
 
