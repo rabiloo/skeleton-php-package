@@ -1,0 +1,55 @@
+{
+    "name": "rabiloo/:package_name",
+    "description": ":package_description",
+    "keywords": [
+        "rabiloo",
+        ":package_name"
+    ],
+    "homepage": "https://github.com/rabiloo/:package_name",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": ":author_name",
+            "email": "oanhnn.bk@gmail.com",
+            "homepage": "https://rabiloo.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.2",
+        "squizlabs/php_codesniffer": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rabiloo\\Skeleton\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Rabiloo\\Skeleton\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "phpunit": "php vendor/phpunit/phpunit/phpunit",
+        "phpcs": "php vendor/squizlabs/php_codesniffer/bin/phpcs",
+        "phpcbf": "php vendor/squizlabs/php_codesniffer/bin/phpcbf"
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Rabiloo\\Skeleton\\SkeletonServiceProvider"
+            ],
+            "aliases": {
+                "Skeleton": "Rabiloo\\Skeleton\\SkeletonFacade"
+            }
+        }
+    }
+}
