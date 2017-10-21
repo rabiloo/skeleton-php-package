@@ -10,7 +10,7 @@
     "authors": [
         {
             "name": ":author_name",
-            "email": "oanhnn.bk@gmail.com",
+            "email": ":author_email",
             "homepage": "https://rabiloo.com",
             "role": "Developer"
         }
