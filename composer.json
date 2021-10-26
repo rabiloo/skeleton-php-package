@@ -5,12 +5,12 @@
     "vendor-slug",
     "package-slug"
   ],
-  "homepage": "https://github.com/vendor-slug/package-slug",
+  "homepage": "https://github.com/github-uri",
   "license": "MIT",
   "authors": [
     {
       "name": "author-name",
-      "email": "author-email@domain.com",
+      "email": "author@domain.com",
       "role": "Developer"
     }
   ],

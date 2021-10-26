@@ -65,36 +65,40 @@ function replace_in_file(string $file, array $replacements): void {
 }
 
 $gitName = run('git config user.name');
-$authorName = ask('Author name', $gitName);
-
 $gitEmail = run('git config user.email');
-$authorEmail = ask('Author email', $gitEmail);
+$gitUrl = run('git config remote.origin.url');
 
-$usernameGuess = explode(':', run('git config remote.origin.url'))[1];
-$usernameGuess = dirname($usernameGuess);
-$usernameGuess = basename($usernameGuess);
-$authorUsername = ask('Author username', $usernameGuess);
+if (!preg_match('/^(https://github.com/|git@github.com:)(.*)\/(.*)\.git$/', $gitUrl, $matches)) {
+    writeln('Invalid git URL');
+    exit(1);
+}
+
+$gitUsername = $matches[2];
+$gitRepository = $matches[3];
+
+$authorName = ask('Author name', $gitName);
+$authorEmail = ask('Author email', $gitEmail);
+$authorUsername = ask('Author username', $gitUsername);
 
 $vendorName = ask('Vendor name', $authorName);
+$vendorEmail = ask('Vendor email', $authorEmail);
 $vendorSlug = ask('Vendor slug', $authorUsername);
 $vendorNamespace = ask('Vendor namespace', pascal_case($vendorSlug));
 
-$currentDirectory = getcwd();
-$folderName = basename($currentDirectory);
-
-$packageName = ask('Package name', $folderName);
+$packageName = ask('Package name', title_case($gitRepository));
 $packageSlug = ask('Package slug', slugify($packageName));
-$packageNamespace = pascal_case($packageName);
+$packageNamespace = ask('Package namespace', pascal_case($packageName));
+$packageDescription = ask('Package description', "This is my package {$packageName}");
+
 $className = ask('Class name', $packageNamespace);
-$description = ask('Package description', "This is my package {$packageName}");
 
 writeln('------');
 writeln("Author     : {$authorName} ({$authorUsername}, {$authorEmail})");
-writeln("Vendor     : {$vendorName} ({$vendorSlug})");
-writeln("Package    : {$packageName} <{$description}>");
+writeln("Vendor     : {$vendorName} ({$vendorSlug}, {$vendorEmail})");
+writeln("Package    : {$packageName} ({$packageSlug}, {$packageDescription})");
 writeln("Namespace  : {$vendorNamespace}\\{$packageNamespace}");
-writeln("Packagist  : {$vendorSlug}/{$packageName}");
-writeln("Github     : https://github.com/{$vendorSlug}/{$packageSlug}");
+writeln("Packagist  : {$vendorSlug}/{$packageSlug}");
+writeln("Github     : https://github.com/{$gitUsername}/{$gitRepository}");
 writeln("Class name : {$className}");
 writeln('------');
 
@@ -107,13 +111,14 @@ if (! confirm('Modify files?', true)) {
 $replacements = [
     'author-name' => $authorName,
     'author-username' => $authorUsername,
-    'author-email@domain.com' => $authorEmail,
+    'author@domain.com' => $authorEmail,
     'vendor-name' => $vendorName,
     'vendor-slug' => $vendorSlug,
+    'vendor@domain.com' => $vendorEmail,
     'package-name' => $packageName,
     'package-slug' => $packageSlug,
     'package-description' => $description,
-    'VendorName' => $vendorName,
+    'github-uri' => "{$gitUsername}/{$gitRepository}",
     'VendorNamespace' => $vendorNamespace,
     'PackageNamespace' => $packageName,
     'SkeletonClass' => $className,

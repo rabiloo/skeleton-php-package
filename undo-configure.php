@@ -7,5 +7,5 @@ function run(string $command): string {
 
 run('git reset head --hard');
 run('git clean -f -d');
-run('rm -fr vendor');
-run('rm composer.lock');
+run('rm -rf vendor');
+run('rm -f composer.lock');
