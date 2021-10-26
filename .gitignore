@@ -1,9 +1,10 @@
 # User specific & automatically generated files #
 #################################################
 composer.lock
+vendor
+.phpunit.result.cache
 phpunit.xml
 phpcs.xml
-vendor
 build
 *.log
 

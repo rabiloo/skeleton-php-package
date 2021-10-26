@@ -1,6 +1,6 @@
 <?php
 
-namespace Rabiloo\Skeleton\Test;
+namespace Test;
 
 use PHPUnit\Framework\TestCase;
 

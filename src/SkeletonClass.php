@@ -1,6 +1,6 @@
 <?php
 
-namespace Rabiloo\Skeleton;
+namespace VendorNamespace\PackageNamespace;
 
 class SkeletonClass
 {
@@ -13,13 +13,15 @@ class SkeletonClass
     }
 
     /**
-     * Friendly welcome.
+     * Hello method.
      *
-     * @param string $phrase Phrase to return
-     * @return string Returns the phrase passed in
+     * Print hello string.
+     *
+     * @param string $name
+     * @return void
      */
-    public function echoPhrase($phrase)
+    public function hello(string $name): void
     {
-        return $phrase;
+        echo "Hello, $name";
     }
 }

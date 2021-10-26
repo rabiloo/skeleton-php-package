@@ -1,6 +1,6 @@
-Changelog
-===
-All Notable changes to `rabiloo/:package_name`  will be documented in this file
+# Changelog
+
+All Notable changes to `vendor-slug/package-slug`  will be documented in this file
 
 
 ## NEXT - YYYY-MM-DD
