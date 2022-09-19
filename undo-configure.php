@@ -1,7 +1,8 @@
 #!/usr/bin/env php
 <?php
 
-function run(string $command): string {
+function run(string $command): string
+{
     return trim(shell_exec($command));
 }
 

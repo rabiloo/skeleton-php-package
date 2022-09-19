@@ -17,7 +17,7 @@ class SkeletonClass
      *
      * Print hello string.
      *
-     * @param string $name
+     * @param  string  $name
      * @return void
      */
     public function hello(string $name): void
