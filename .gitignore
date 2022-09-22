@@ -5,6 +5,7 @@ vendor
 .phpunit.result.cache
 phpunit.xml
 phpcs.xml
+psalm.xml
 build
 *.log
 

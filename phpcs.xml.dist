@@ -30,12 +30,12 @@
     </rule>
 
     <!-- You SHOULD fix all TODO and FIXME markers -->
-    <!-- <rule ref="Generic.Commenting.Fixme">
+    <rule ref="Generic.Commenting.Fixme">
         <type>WARNING</type>
     </rule>
     <rule ref="Generic.Commenting.Todo">
         <type>WARNING</type>
-    </rule> -->
+    </rule>
 
     <!-- You MUST NOT use deprecated functions -->
     <rule ref="Generic.PHP.DeprecatedFunctions"/>
@@ -43,11 +43,6 @@
     <!-- You SHOULD comment if method or function has exception -->
     <rule ref="Squiz.Commenting.FunctionCommentThrowTag">
         <type>WARNING</type>
-    </rule>
-
-    <!-- Exclude some PHP files, it haven't class definitions -->
-    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
-        <exclude-pattern>database/*</exclude-pattern>
     </rule>
 
     <!-- Exclude test classes, it can have not CamelCapsMethodName  -->

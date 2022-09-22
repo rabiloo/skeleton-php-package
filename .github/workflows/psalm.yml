@@ -1,4 +1,4 @@
-name: Psalm
+name: Run Psalm
 
 on:
   push:

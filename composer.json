@@ -1,15 +1,15 @@
 {
-  "name": "vendor-slug/package-slug",
-  "description": "package-description",
+  "name": ":vendor_slug/:package_slug",
+  "description": ":package-description",
   "keywords": [
-    "vendor-slug",
-    "package-slug"
+    ":vendor-slug",
+    ":package-slug"
   ],
-  "homepage": "https://github.com/github-uri",
+  "homepage": "https://github.com/:vendor_slug/:package_slug",
   "license": "MIT",
   "authors": [
     {
-      "name": "author-name",
+      "name": ":author_name",
       "email": "author@domain.com",
       "role": "Developer"
     }
@@ -25,19 +25,19 @@
   },
   "autoload": {
     "psr-4": {
-      "VendorNamespace\\PackageNamespace\\": "src"
+      "VendorName\\Skeleton\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Test\\": "tests"
+      "VendorName\\Skeleton\\Tests\\": "tests"
     }
   },
   "scripts": {
+    "analyse": "vendor/bin/psalm",
+    "format": "vendor/bin/phpcbf && vendor/bin/pint",
     "test": "vendor/bin/phpunit",
-    "format": "vendor/bin/phpcbf",
-    "format:check": "vendor/bin/phpcs",
-    "psalm": "vendor/bin/psalm"
+    "test-coverage": "vendor/bin/phpunit --coverage"
   },
   "config": {
     "sort-packages": true

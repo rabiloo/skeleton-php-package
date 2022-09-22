@@ -68,7 +68,43 @@ function replace_in_file(string $file, array $replacements): void
     );
 }
 
-function removeReadmeParagraphs(string $file): void
+function remove_prefix(string $prefix, string $content): string
+{
+    if (str_starts_with($content, $prefix)) {
+        return substr($content, strlen($prefix));
+    }
+
+    return $content;
+}
+
+function remove_composer_deps(array $names)
+{
+    $data = json_decode(file_get_contents(__DIR__.'/composer.json'), true);
+
+    foreach ($data['require-dev'] as $name => $version) {
+        if (in_array($name, $names, true)) {
+            unset($data['require-dev'][$name]);
+        }
+    }
+
+    file_put_contents(__DIR__.'/composer.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+}
+
+function remove_composer_script($scriptName)
+{
+    $data = json_decode(file_get_contents(__DIR__.'/composer.json'), true);
+
+    foreach ($data['scripts'] as $name => $script) {
+        if ($scriptName === $name) {
+            unset($data['scripts'][$name]);
+            break;
+        }
+    }
+
+    file_put_contents(__DIR__.'/composer.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+}
+
+function remove_readme_paragraphs(string $file): void
 {
     $contents = file_get_contents($file);
 
@@ -78,7 +114,14 @@ function removeReadmeParagraphs(string $file): void
     );
 }
 
-function determineSeparator(string $path): string
+function safe_unlink(string $filename)
+{
+    if (file_exists($filename) && is_file($filename)) {
+        unlink($filename);
+    }
+}
+
+function determine_separator(string $path): string
 {
     return str_replace('/', DIRECTORY_SEPARATOR, $path);
 }
