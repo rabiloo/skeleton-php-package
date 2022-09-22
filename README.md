@@ -28,8 +28,8 @@ composer require :vendor_slug/:package_slug
 ## Usage
 
 ```php
-$skeleton = new VendorName\Skeleton();
-echo $skeleton->echoPhrase('Hello, VendorName!');
+$skeleton = new \VendorNamespace\PackageNamespace\Skeleton();
+var_dump($skeleton);
 ```
 
 ## Testing

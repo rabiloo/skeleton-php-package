@@ -1,9 +1,9 @@
 {
   "name": ":vendor_slug/:package_slug",
-  "description": ":package-description",
+  "description": ":package_description",
   "keywords": [
-    ":vendor-slug",
-    ":package-slug"
+    ":vendor_slug",
+    ":package_slug"
   ],
   "homepage": "https://github.com/:vendor_slug/:package_slug",
   "license": "MIT",

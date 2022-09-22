@@ -296,7 +296,7 @@ foreach ($files as $file) {
         ':package_name' => $packageName,
         ':package_slug' => $packageSlug,
         'PackageNamespace' => $packageNamespace,
-        ':namespace' => json_encode("{$vendorNamespace}\\{$packageNamespace}"),
+        ':namespace' => trim(json_encode("{$vendorNamespace}\\{$packageNamespace}"), '"'),
         'Skeleton' => $className,
         ':package_description' => $description,
     ]);
