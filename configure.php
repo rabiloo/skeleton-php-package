@@ -223,10 +223,10 @@ function find_files_to_replace(): array
 {
     if (str_starts_with(strtoupper(PHP_OS), 'WIN')) {
         // Windows
-        return preg_split('/\\r\\n|\\r|\\n/', run('dir /S /B * | findstr /v /i .git\ | findstr /v /i vendor | findstr /v /i ' . basename(__FILE__) . ' | findstr /r /i /M /F:/ ":author :vendor :package VendorName skeleton vendor_name vendor_slug author@domain.com"'));
+        return preg_split('/\\r\\n|\\r|\\n/', run('dir /S /B * | findstr /v /i .git\ | findstr /v /i vendor | findstr /v /i ' . basename(__FILE__) . ' | findstr /r /i /M /F:/ "author_ vendor_ package_ VendorNamespace PackageNamespace Skeleton :namespace vendor@domain.com author@domain.com"'));
     } else {
         // Unix
-        return explode(PHP_EOL, run('grep -E -r -l -i ":author|:vendor|:package|VendorName|skeleton|vendor_name|vendor_slug|author@domain.com" --exclude-dir=vendor ./* ./.github/* | grep -v ' . basename(__FILE__)));
+        return explode(PHP_EOL, run('grep -E -r -l -i "author_|vendor_|package_|VendorNamespace|PackageNamespace|Skeleton|:namespace|vendor@domain.com|author@domain.com" --exclude-dir=vendor ./* ./.github/* | grep -v ' . basename(__FILE__)));
     }
 }
 
@@ -286,19 +286,19 @@ $files = find_files_to_replace();
 
 foreach ($files as $file) {
     replace_in_file($file, [
-        ':author_name' => $authorName,
-        ':author_username' => $authorSlug,
+        'author_name' => $authorName,
+        'author_username' => $authorSlug,
         'author@domain.com' => $authorEmail,
-        ':vendor_name' => $vendorName,
-        ':vendor_slug' => $vendorSlug,
+        'vendor_name' => $vendorName,
+        'vendor_slug' => $vendorSlug,
         'vendor@domain.com' => $vendorEmail,
         'VendorNamespace' => $vendorNamespace,
-        ':package_name' => $packageName,
-        ':package_slug' => $packageSlug,
+        'package_name' => $packageName,
+        'package_slug' => $packageSlug,
+        'package_description' => $description,
         'PackageNamespace' => $packageNamespace,
         ':namespace' => trim(json_encode("{$vendorNamespace}\\{$packageNamespace}"), '"'),
         'Skeleton' => $className,
-        ':package_description' => $description,
     ]);
 
     match (true) {

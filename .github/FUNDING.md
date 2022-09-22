@@ -1,1 +1,1 @@
-github: :vendor_slug
+github: vendor_slug

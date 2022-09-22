@@ -1,15 +1,15 @@
 {
-  "name": ":vendor_slug/:package_slug",
-  "description": ":package_description",
+  "name": "vendor_slug/package_slug",
+  "description": "package_description",
   "keywords": [
-    ":vendor_slug",
-    ":package_slug"
+    "vendor_slug",
+    "package_slug"
   ],
-  "homepage": "https://github.com/:vendor_slug/:package_slug",
+  "homepage": "https://github.com/vendor_slug/package_slug",
   "license": "MIT",
   "authors": [
     {
-      "name": ":author_name",
+      "name": "author_name",
       "email": "author@domain.com",
       "role": "Developer"
     }
