@@ -1,9 +1,17 @@
 #!/usr/bin/env php
 <?php
 
-function run(string $command): string
+/**
+ * It runs a command and prints the output
+ *
+ * @param string command The command to run.
+ */
+function run(string $command): void
 {
-    return trim(shell_exec($command));
+    $out = shell_exec($command);
+
+    echo ">>> " . $command . PHP_EOL;
+    echo trim((string) $out);
 }
 
 run('git reset HEAD --hard');
