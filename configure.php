@@ -248,7 +248,7 @@ $authorUsername = ask('Author username', $usernameGuess);
 $vendorName = ask('Vendor name', $authorUsername);
 $vendorEmail = ask('Vendor email', $authorEmail);
 $vendorSlug = slugify($vendorName);
-$vendorNamespace = ucwords($vendorName);
+$vendorNamespace = title_case($vendorSlug);
 $vendorNamespace = ask('Vendor namespace', $vendorNamespace);
 
 $currentDirectory = getcwd();
@@ -256,6 +256,8 @@ $folderName = basename($currentDirectory);
 
 $packageName = ask('Package name', $folderName);
 $packageSlug = slugify($packageName);
+$packageNamespace = title_case($packageSlug);
+$packageNamespace = ask('Package namespace', $packageNamespace);
 
 $className = title_case($packageName);
 $className = ask('Class name', $className);
@@ -269,7 +271,7 @@ writeln('------');
 writeln("Author     : {$authorName} ({$authorUsername}, {$authorEmail})");
 writeln("Vendor     : {$vendorName} ({$vendorSlug}, {$vendorEmail})");
 writeln("Package    : {$packageSlug} <{$description}>");
-writeln("Namespace  : {$vendorNamespace}\\{$className}");
+writeln("Namespace  : {$vendorNamespace}\{$packageNamespace}");
 writeln("Class name : {$className}");
 writeln('---');
 writeln('Packages & Utilities');
@@ -294,11 +296,12 @@ foreach ($files as $file) {
         ':vendor_name' => $vendorName,
         ':vendor_slug' => $vendorSlug,
         'vendor@domain.com' => $vendorEmail,
-        'VendorName' => $vendorNamespace,
+        'VendorNamespace' => $vendorNamespace,
         ':package_name' => $packageName,
         ':package_slug' => $packageSlug,
+        'PackageNamespace' => $packageNamespace,
+        ':namespace' => json_encode("{$vendorNamespace}\{$packageNamespace}"),
         'Skeleton' => $className,
-        'skeleton' => $packageSlug,
         ':package_description' => $description,
     ]);
 
