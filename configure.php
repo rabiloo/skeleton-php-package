@@ -235,32 +235,27 @@ function find_files_to_replace(): array
 // ===============
 
 $gitName = run('git config user.name');
-$authorName = ask('Author name', $gitName);
-
 $gitEmail = run('git config user.email');
+$username = explode(':', run('git config remote.origin.url'))[1];
+$username = basename(dirname($username));
+
+$authorName = ask('Author name', $gitName);
 $authorEmail = ask('Author email', $gitEmail);
+$authorSlug = ask('Author username', $username);
 
-$usernameGuess = explode(':', run('git config remote.origin.url'))[1];
-$usernameGuess = dirname($usernameGuess);
-$usernameGuess = basename($usernameGuess);
-$authorUsername = ask('Author username', $usernameGuess);
-
-$vendorName = ask('Vendor name', $authorUsername);
+$vendorName = ask('Vendor name', title_case($username));
 $vendorEmail = ask('Vendor email', $authorEmail);
-$vendorSlug = slugify($vendorName);
-$vendorNamespace = title_case($vendorSlug);
-$vendorNamespace = ask('Vendor namespace', $vendorNamespace);
+$vendorSlug = ask('Vendor slug', $authorSlug === $username ? slugify($vendorName) : $username);
+$vendorNamespace = ask('Vendor namespace', title_case($vendorSlug));
 
 $currentDirectory = getcwd();
 $folderName = basename($currentDirectory);
 
 $packageName = ask('Package name', $folderName);
-$packageSlug = slugify($packageName);
-$packageNamespace = title_case($packageSlug);
-$packageNamespace = ask('Package namespace', $packageNamespace);
+$packageSlug = ask('Package slug', slugify($packageName));
+$packageNamespace = ask('Package namespace', title_case($packageSlug));
 
-$className = title_case($packageName);
-$className = ask('Class name', $className);
+$className = ask('Class name', remove_prefix('Laravel', title_case($packageSlug)));
 $description = ask('Package description', "This is my package {$packageSlug}");
 
 $usePsalm = confirm('Enable Psalm?', true);
@@ -268,10 +263,11 @@ $useDependabot = confirm('Enable Dependabot?', true);
 $useUpdateChangelogWorkflow = confirm('Use automatic changelog updater workflow?', true);
 
 writeln('------');
-writeln("Author     : {$authorName} ({$authorUsername}, {$authorEmail})");
+writeln("Author     : {$authorName} ({$authorSlug}, {$authorEmail})");
 writeln("Vendor     : {$vendorName} ({$vendorSlug}, {$vendorEmail})");
-writeln("Package    : {$packageSlug} <{$description}>");
-writeln("Namespace  : {$vendorNamespace}\{$packageNamespace}");
+writeln("Package    : {$packageName} ({$vendorSlug}/{$packageSlug})");
+writeln("             {$description}");
+writeln("Namespace  : {$vendorNamespace}\\{$packageNamespace}");
 writeln("Class name : {$className}");
 writeln('---');
 writeln('Packages & Utilities');
@@ -291,7 +287,7 @@ $files = find_files_to_replace();
 foreach ($files as $file) {
     replace_in_file($file, [
         ':author_name' => $authorName,
-        ':author_username' => $authorUsername,
+        ':author_username' => $authorSlug,
         'author@domain.com' => $authorEmail,
         ':vendor_name' => $vendorName,
         ':vendor_slug' => $vendorSlug,
@@ -300,7 +296,7 @@ foreach ($files as $file) {
         ':package_name' => $packageName,
         ':package_slug' => $packageSlug,
         'PackageNamespace' => $packageNamespace,
-        ':namespace' => json_encode("{$vendorNamespace}\{$packageNamespace}"),
+        ':namespace' => json_encode("{$vendorNamespace}\\{$packageNamespace}"),
         'Skeleton' => $className,
         ':package_description' => $description,
     ]);
