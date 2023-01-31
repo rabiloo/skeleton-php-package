@@ -1,6 +1,9 @@
 {
   "preset": "psr12",
   "rules": {
+    "array_syntax": {
+      "syntax": "short"
+    },
     "binary_operator_spaces": {
       "default": "single_space"
     },
@@ -12,5 +15,8 @@
     },
     "not_operator_with_successor_space": false,
     "unary_operator_spaces": true
-  }
+  },
+  "exclude": [
+    "vendor"
+  ]
 }

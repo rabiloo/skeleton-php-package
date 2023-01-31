@@ -2,12 +2,15 @@
 <ruleset
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd"
-    name="vendor_name's PHP coding standard"
+    name="Rabiloo"
 >
-    <description>This standard extends PSR-12</description>
+    <description>Rabiloo's PHP coding standard</description>
 
     <!-- display progress -->
     <arg value="p"/>
+
+    <!-- Show sniff codes in all reports -->
+    <arg value= "s"/>
 
     <!-- use colors in output -->
     <arg name="colors"/>
@@ -21,31 +24,9 @@
     <exclude-pattern>*/*.xml</exclude-pattern>
     <exclude-pattern>*/*.blade.php</exclude-pattern>
 
-    <!-- Inherit rules from: PSR12-->
-    <rule ref="PSR12"/>
+    <rule ref="vendor/rabiloo/coding-standard/ruleset.xml"/>
 
-    <!-- You SHOULD use short array syntax -->
-    <rule ref="Generic.Arrays.DisallowLongArraySyntax">
-        <type>WARNING</type>
-    </rule>
-
-    <!-- You SHOULD fix all TODO and FIXME markers -->
-    <rule ref="Generic.Commenting.Fixme">
-        <type>WARNING</type>
-    </rule>
-    <rule ref="Generic.Commenting.Todo">
-        <type>WARNING</type>
-    </rule>
-
-    <!-- You MUST NOT use deprecated functions -->
-    <rule ref="Generic.PHP.DeprecatedFunctions"/>
-
-    <!-- You SHOULD comment if method or function has exception -->
-    <rule ref="Squiz.Commenting.FunctionCommentThrowTag">
-        <type>WARNING</type>
-    </rule>
-
-    <!-- Exclude test classes, it can have not CamelCapsMethodName  -->
+    <!-- Exclude test classes, it can have not CamelCapsMethodName -->
     <rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
         <exclude-pattern>tests/*Test.php</exclude-pattern>
     </rule>
