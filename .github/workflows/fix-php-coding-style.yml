@@ -19,13 +19,21 @@ jobs:
           php-version: '8.1'
           extensions: dom, libxml, zip
           coverage: none
-          tools: phpcbf
+          tools: composer
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.json') }}
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction
 
       - name: Check & fix styling
-        run: phpcbf
-
-      - name: Fix PHP code style issues
-        uses: aglipanci/laravel-pint-action@2.1.0
+        run: |
+          ./vendor/bin/pint
+          ./vendor/bin/phpcbf
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
